@@ -6,14 +6,64 @@ import java.util.Scanner;
 
 public class Hero {
 
-    public String name;
-    public int armor;
-    public int accuracy;
-    public int hp;
-    public int strength;
-    public int intelligence;
-    public int damage;
-    public boolean defend;
+    public String getName() {
+        return name;
+    }
+    public int getArmor() {
+        return armor;
+    }
+    public int getAccuracy() {
+        return accuracy;
+    }
+    public int getHp() {
+        return hp;
+    }
+    public int getStrength() {
+        return strength;
+    }
+    public int getIntelligence() {
+        return intelligence;
+    }
+    public int getDamage() {
+        return damage;
+    }
+    public boolean isDefend() {
+        return defend;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setArmor(int armor) {
+        this.armor = armor;
+    }
+    public void setAccuracy(int accuracy) {
+        this.accuracy = accuracy;
+    }
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
+    public void setIntelligence(int intelligence) {
+        this.intelligence = intelligence;
+    }
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+    public void setDefend(boolean defend) {
+        this.defend = defend;
+    }
+
+    private String name;
+    private int armor;
+    private int accuracy;
+    private int hp;
+    private int strength;
+    private int intelligence;
+    private int damage;
+    private boolean defend;
 
     public static int randInt(int min, int max) {
         Random rand = new Random();
