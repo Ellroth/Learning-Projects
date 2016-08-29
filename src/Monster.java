@@ -6,17 +6,24 @@ import java.util.Random;
 public class Monster {
 
     private String name;
+    private String monsterAction;
     private int armor;
     private int accuracy;
-    private int hp;
+    private int totalHp;
+    private int remainingHp;
     private int strength;
     private int intelligence;
     private int damage;
     private int heroNumber;
     private int target;
+    private int monsterMove;
+    private boolean monsterStatus;
 
     public String getName() {
         return name;
+    }
+    public String getMonsterAction() {
+        return monsterAction;
     }
     public int getArmor() {
         return armor;
@@ -24,8 +31,11 @@ public class Monster {
     public int getAccuracy() {
         return accuracy;
     }
-    public int getHp() {
-        return hp;
+    public int getTotalHp() {
+        return totalHp;
+    }
+    public int getRemainingHp() {
+        return remainingHp;
     }
     public int getStrength() {
         return strength;
@@ -42,6 +52,13 @@ public class Monster {
     public int getTarget() {
         return target;
     }
+    public int getMonsterMove() {
+        return monsterMove;
+    }
+    public boolean getMonsterStatus() {
+        return monsterStatus;
+    }
+
 
     public void setName(String name) {
         this.name = name;
@@ -52,8 +69,11 @@ public class Monster {
     public void setAccuracy(int accuracy) {
         this.accuracy = accuracy;
     }
-    public void setHp(int hp) {
-        this.hp = hp;
+    public void setTotalHp(int totalHp) {
+        this.totalHp = totalHp;
+    }
+    public void setRemainingHp(int remainingHp) {
+        this.remainingHp=remainingHp;
     }
     public void setStrength(int strength) {
         this.strength = strength;
@@ -66,6 +86,25 @@ public class Monster {
     }
     public void setTarget(int target) {
         this.target = target;
+    }
+    public void isMonsterStatus(boolean monsterStatus) {
+        this.monsterStatus=monsterStatus;
+    }
+    public void setMonsterMove(int monsterMove) {
+        this.monsterMove=monsterMove;
+    }
+    public void setMonsterAction(String monsterAction) {
+        this.monsterAction=monsterAction;
+    }
+
+    public boolean monsterStatus() {
+        if (remainingHp == 0) {
+            monsterStatus = false;
+        }
+        else {
+            monsterStatus = true;
+        }
+        return monsterStatus;
     }
 
     public void setHeroNumber(int heroNumber) {
@@ -80,32 +119,64 @@ public class Monster {
 
     public Monster(String name) {
         this.name=name;
-        this.hp=randInt(1000,1500);
+        this.totalHp=randInt(1000,1500);
         this.armor=randInt(1,80); // number = % reduction
         this.accuracy=randInt(1,50); // hit chance% = 100 - accuracy.
+        this.strength=randInt(1,150);
+        this.intelligence=randInt(1,150);
+    }
+
+    public void takeDamage(int tempDamage) {
+
+        remainingHp = (remainingHp - tempDamage);
+        if (remainingHp < 0) {
+            remainingHp = 0;
+        }
     }
 
     public void target() {
         setHeroNumber(randInt(1,4));
 
         switch(heroNumber) {
-            case 1: target = 1;
-            case 2: target = 2;
-            case 3: target = 3;
-            case 4: target = 4;
+            case 1:
+                target = 1;
+                break;
+            case 2:
+                target = 2;
+                break;
+            case 3:
+                target = 3;
+                break;
+            case 4:
+                target = 4;
+                break;
         }
 
 
     }
 
-    public Monster (String name, int armor, int accuracy, int hp, int strength, int intelligence) {
-        this.name=name;
-        this.armor=armor;
-        this.accuracy=accuracy;
-        this.hp=hp;
-        this.strength=strength;
-        this.intelligence=intelligence;
-
-
+    public void monsterTurn() {  // KEEPS GOING TO CASE 3 EVERY TIME.
+        monsterMove=randInt(1,3);
+        switch (monsterMove) {
+            case 1: //basic attack
+                damage = (strength*2)+1;
+                monsterAction="bruteForce()";
+                break;
+            case 2: //magic attack
+                damage = (intelligence*3)-(intelligence/2);
+                monsterAction="stackOverflow()";
+                break;
+            case 3: //heal
+                int healed = randInt(50,200);
+                remainingHp = remainingHp+healed;
+                System.out.println(name + " ran debug() and healed for " + healed + ".");
+                break;
+        }
     }
+
+    public void monsterStats() {
+        System.out.println("\n\n==== BOSS ====\n");
+        System.out.println("== " + name + "'S STATS ==\n\n\tHP : " + remainingHp + "\n\tStrength : " + strength + "\n\tArmor : " + armor + "\n\tAccuracy: " + accuracy + "\n\tIntelligence: " + intelligence + "\n\n");
+    }
+
 }

@@ -15,8 +15,11 @@ public class Hero {
     public int getAccuracy() {
         return accuracy;
     }
-    public int getHp() {
-        return hp;
+    public int getRemainingHp() {
+        return remainingHp;
+    }
+    public int getTotalHp() {
+        return totalHp;
     }
     public int getStrength() {
         return strength;
@@ -34,6 +37,7 @@ public class Hero {
         return heroStatus;
     }
 
+
     public void setName(String name) {
         this.name = name;
     }
@@ -43,8 +47,8 @@ public class Hero {
     public void setAccuracy(int accuracy) {
         this.accuracy = accuracy;
     }
-    public void setHp(int hp) {
-        this.hp = hp;
+    public void setRemainingHp(int remainingHp) {
+        this.remainingHp = remainingHp;
     }
     public void setStrength(int strength) {
         this.strength = strength;
@@ -65,12 +69,14 @@ public class Hero {
     private String name;
     private int armor;
     private int accuracy;
-    private int hp;
     private int strength;
     private int intelligence;
     private int damage;
+    private int totalHp;
+    private int remainingHp;
     private boolean defend;
     private boolean heroStatus;
+
 
     public static int randInt(int min, int max) {
         Random rand = new Random();
@@ -83,8 +89,8 @@ public class Hero {
         return damage;
     }
 
-    public int magic(int magic) {
-        damage = (magic*3)-(magic/2);
+    public int magic(int intelligence) {
+        damage = (intelligence*3)-(intelligence/2);
         return damage;
     }
 
@@ -102,8 +108,18 @@ public class Hero {
 
     }
 
-    public void heroStats(String name, int hp, int strength, int armor, int accuracy, int intelligence) {
-        System.out.println("== " + name + "'S STATS ==\n\n\tHP : " + hp + "\n\tStrength : " + strength + "\n\tArmor : " + armor + "\n\tAccuracy: " + accuracy + "\n\tIntelligence: " + intelligence + "\n\n");
+    public boolean heroStatus() {
+        if (remainingHp == 0) {
+            heroStatus = false;
+        }
+        else {
+            heroStatus = true;
+        }
+        return heroStatus;
+    }
+
+    public void heroStats(String name, int remainingHp, int strength, int armor, int accuracy, int intelligence) {
+        System.out.println("== " + name + "'S STATS ==\n\n\tHP : " + remainingHp + "\n\tStrength : " + strength + "\n\tArmor : " + armor + "\n\tAccuracy: " + accuracy + "\n\tIntelligence: " + intelligence + "\n\n");
     }
 
     public void heroCommands (String name) {
@@ -114,8 +130,8 @@ public class Hero {
         Scanner input = new Scanner(System.in);
         boolean testCase1;
 
+        heroStats(name, remainingHp, strength, armor, accuracy, intelligence);
         heroCommands(name);
-        heroStats(name, hp, strength, armor, accuracy, intelligence);
 
         do {
             defend = false;
@@ -136,7 +152,7 @@ public class Hero {
                     System.out.println("\n" + name + " is defending...\n");
                     testCase1 = true;
                     break;
-                case "RUN": //MAKE SURE RUN IS PULLING NEW NUMBER EVERY TIME
+                case "RUN":
                     System.out.println("\n" + name + " is attempting to run away...");
                     System.out.print(name);
                     run();
@@ -149,12 +165,20 @@ public class Hero {
         } while (!testCase1);
     }
 
-    public Hero(String name, int strength, int armor, int accuracy, int intelligence, int hp) {
+    public void takeDamage(int tempDamage) {
+
+        remainingHp = (remainingHp - (tempDamage/armor)+1);
+        if (remainingHp < 0) {
+            remainingHp = 0;
+        }
+    }
+
+    public Hero(String name, int strength, int armor, int accuracy, int intelligence, int totalHp) {
         this.name=name;
         this.strength=strength;
         this.armor=armor;
         this.accuracy=accuracy;
         this.intelligence=intelligence;
-        this.hp=hp;
+        this.totalHp=totalHp;
     }
 }
