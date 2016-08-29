@@ -30,6 +30,9 @@ public class Hero {
     public boolean isDefend() {
         return defend;
     }
+    public boolean isHeroStatus() {
+        return heroStatus;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -55,6 +58,9 @@ public class Hero {
     public void setDefend(boolean defend) {
         this.defend = defend;
     }
+    public void setHeroStatus(boolean heroStatus) {
+        this.heroStatus = heroStatus;
+    }
 
     private String name;
     private int armor;
@@ -64,6 +70,7 @@ public class Hero {
     private int intelligence;
     private int damage;
     private boolean defend;
+    private boolean heroStatus;
 
     public static int randInt(int min, int max) {
         Random rand = new Random();

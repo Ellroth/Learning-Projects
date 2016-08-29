@@ -15,11 +15,17 @@ public class Battle {
         final String BATTLE_INTRO = "Welcome to battle sim. You have a party of 4 heroes that have just encountered the final boss. It is up to you to save the world!";
 
         System.out.println(BATTLE_INTRO);
+        // set a do while loop for battle condition. 
         do{
             hero1.heroTurn(hero1.getName(), hero1.getHp(), hero1.getStrength(), hero1.getArmor(), hero1.getAccuracy(), hero1.getIntelligence());
             hero2.heroTurn(hero2.getName(), hero2.getHp(), hero2.getStrength(), hero2.getArmor(), hero2.getAccuracy(), hero2.getIntelligence());
             hero3.heroTurn(hero3.getName(), hero3.getHp(), hero3.getStrength(), hero3.getArmor(), hero3.getAccuracy(), hero3.getIntelligence());
             hero4.heroTurn(hero4.getName(), hero4.getHp(), hero4.getStrength(), hero4.getArmor(), hero4.getAccuracy(), hero4.getIntelligence());
-        } while (monster1.getHp() != 0);
+        } while (monster1.getHp() != 0); // this will not enter the moster loop properly, fix
+        if (hero1.isHeroStatus() || hero2.isHeroStatus() || hero3.isHeroStatus() || hero4.isHeroStatus())
+            do{
+            monster1.getTarget();
+            hero
+        } while (hero1.isHeroStatus() || hero2.isHeroStatus() || hero3.isHeroStatus() || hero4.isHeroStatus()); // this will never exit moster loop. fix it.
     }
 }

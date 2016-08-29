@@ -12,6 +12,8 @@ public class Monster {
     private int strength;
     private int intelligence;
     private int damage;
+    private int heroNumber;
+    private int target;
 
     public String getName() {
         return name;
@@ -34,6 +36,12 @@ public class Monster {
     public int getDamage() {
         return damage;
     }
+    public int getHeroNumber() {
+        return heroNumber;
+    }
+    public int getTarget() {
+        return target;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -50,11 +58,18 @@ public class Monster {
     public void setStrength(int strength) {
         this.strength = strength;
     }
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
     public void setIntelligence(int intelligence) {
         this.intelligence = intelligence;
     }
-    public void setDamage(int damage) {
-        this.damage = damage;
+    public void setTarget(int target) {
+        this.target = target;
+    }
+
+    public void setHeroNumber(int heroNumber) {
+        this.heroNumber = heroNumber;
     }
 
     public static int randInt(int min, int max) {
@@ -70,6 +85,18 @@ public class Monster {
         this.accuracy=randInt(1,50); // hit chance% = 100 - accuracy.
     }
 
+    public void target() {
+        setHeroNumber(randInt(1,4));
+
+        switch(heroNumber) {
+            case 1: target = 1;
+            case 2: target = 2;
+            case 3: target = 3;
+            case 4: target = 4;
+        }
+
+
+    }
 
     public Monster (String name, int armor, int accuracy, int hp, int strength, int intelligence) {
         this.name=name;
