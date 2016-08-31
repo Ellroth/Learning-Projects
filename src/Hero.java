@@ -126,7 +126,7 @@ public class Hero {
         System.out.println("It is the " + name + "'s turn. You can use ATTACK, MAGIC, DEFEND, or RUN. Please input your action now. (case sensitive)\n");
     }
 
-    public void heroTurn(String name, int hp, int strength, int armor, int accuracy, int intelligence) {
+    public void heroTurn(String name, int remainingHp, int strength, int armor, int accuracy, int intelligence) {
         Scanner input = new Scanner(System.in);
         boolean testCase1;
 
@@ -167,9 +167,10 @@ public class Hero {
 
     public void takeDamage(int tempDamage) {
 
-        remainingHp = (remainingHp - (tempDamage/armor)+1);
-        if (remainingHp < 0) {
-            remainingHp = 0;
+        remainingHp = (remainingHp - (tempDamage/armor));
+
+        if (remainingHp <= 0) {
+            setRemainingHp(0);
         }
     }
 

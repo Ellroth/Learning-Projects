@@ -156,17 +156,17 @@ public class Monster {
     }
 
     public void monsterTurn() {  // KEEPS GOING TO CASE 3 EVERY TIME.
-        monsterMove=randInt(1,3);
+        monsterMove=randInt(1,11);
         switch (monsterMove) {
-            case 1: //basic attack
+            case 1: case 2:case 3: case 4: case 5: //basic attack
                 damage = (strength*2)+1;
                 monsterAction="bruteForce()";
                 break;
-            case 2: //magic attack
+            case 6: case 7: case 8: case 9: case 10: //magic attack
                 damage = (intelligence*3)-(intelligence/2);
                 monsterAction="stackOverflow()";
                 break;
-            case 3: //heal
+            case 11: //heal
                 int healed = randInt(50,200);
                 remainingHp = remainingHp+healed;
                 System.out.println(name + " ran debug() and healed for " + healed + ".");
@@ -177,6 +177,10 @@ public class Monster {
     public void monsterStats() {
         System.out.println("\n\n==== BOSS ====\n");
         System.out.println("== " + name + "'S STATS ==\n\n\tHP : " + remainingHp + "\n\tStrength : " + strength + "\n\tArmor : " + armor + "\n\tAccuracy: " + accuracy + "\n\tIntelligence: " + intelligence + "\n\n");
+    }
+
+    public void damageArmorModify (int tempDamage, int armor) {
+        damage = tempDamage / armor;
     }
 
 }
